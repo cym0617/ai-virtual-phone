@@ -1,3 +1,16 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100dvh;
+  height: auto;
+  overflow-anchor: none;
+}
+
+:root {
+  min-height: 100dvh;
+}
+
 @import "tailwindcss";
 @import "../styles/tokens.css";
 @import "../styles/base.css";
