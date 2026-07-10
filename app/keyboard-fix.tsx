@@ -4,25 +4,35 @@ import { useEffect } from "react";
 
 export default function KeyboardFix() {
   useEffect(() => {
-    const updateLayout = () => {
-      if (window.visualViewport) {
-        const visibleHeight = window.visualViewport.height;
-        document.documentElement.style.height = `${visibleHeight}px`;
-        document.body.style.height = `${visibleHeight}px`;
-      }
+    const root = document.documentElement;
+
+    const update = () => {
+      const vv = window.visualViewport;
+
+      if (!vv) return;
+
+      const keyboardHeight = Math.max(
+        0,
+        window.innerHeight - vv.height - vv.offsetTop
+      );
+
+      root.style.setProperty(
+        "--keyboard-height",
+        `${Math.round(keyboardHeight)}px`
+      );
+
+      window.scrollTo(0, 0);
     };
 
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener("resize", updateLayout);
-      window.visualViewport.addEventListener("scroll", updateLayout);
-      updateLayout();
-    }
+    window.visualViewport?.addEventListener("resize", update);
+    window.visualViewport?.addEventListener("scroll", update);
+
+    update();
 
     return () => {
-      if (window.visualViewport) {
-        window.visualViewport.removeEventListener("resize", updateLayout);
-        window.visualViewport.removeEventListener("scroll", updateLayout);
-      }
+      window.visualViewport?.removeEventListener("resize", update);
+      window.visualViewport?.removeEventListener("scroll", update);
+      root.style.removeProperty("--keyboard-height");
     };
   }, []);
 
