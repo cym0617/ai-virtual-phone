@@ -6317,3 +6317,9 @@
   line-height: 1.55;
   font-size: calc(12.5px * var(--app-text-scale, 1));
 }
+
+/* 手机软键盘修复：让聊天输入栏上浮到键盘上方 */
+.chat-input-bar {
+  bottom: var(--keyboard-height, 0px) !important;
+  z-index: 50;
+}
