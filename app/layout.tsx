@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 
 import { PWARegistrar } from "@/components/pwa-registrar";
+import KeyboardFix from "./keyboard-fix";
 import "../styles/fonts.css";
 import "./globals.css";
 
