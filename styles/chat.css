@@ -6318,11 +6318,26 @@
   font-size: calc(12.5px * var(--app-text-scale, 1));
 }
 
-/* 手机软键盘修复：让聊天输入栏上浮到键盘上方 */
+/* 手机软键盘修复：输入栏贴近键盘，去掉中间空隙 */
+:root {
+  --keyboard-gap-fix: 72px;
+}
+
 .chat-input-bar {
-  bottom: max(
+  --keyboard-raw-height: max(
     var(--keyboard-height, 0px),
     env(keyboard-inset-height, 0px)
+  );
+
+  bottom: max(
+    0px,
+    calc(var(--keyboard-raw-height) - var(--keyboard-gap-fix))
   ) !important;
+
   z-index: 999 !important;
+}
+
+/* 顺便收紧图标栏下面的留白 */
+.chat-input-bar .chat-input-actions {
+  padding-bottom: 10px !important;
 }
