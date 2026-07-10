@@ -40,6 +40,7 @@ export default function RootLayout({
       </head>
       <body>
         <PWARegistrar />
+        <KeyboardFix />
         {children}
       </body>
     </html>
