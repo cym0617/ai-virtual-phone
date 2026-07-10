@@ -6320,7 +6320,7 @@
 
 /* 手机软键盘修复：输入栏贴近键盘，去掉中间空隙 */
 :root {
-  --keyboard-gap-fix: 32px;
+  --keyboard-gap-fix: 40px;
 }
 
 .chat-input-bar {
