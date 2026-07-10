@@ -4,26 +4,27 @@ import { useEffect } from "react";
 
 export default function KeyboardFix() {
   useEffect(() => {
-    const handleResize = () => {
+    const updateLayout = () => {
       if (window.visualViewport) {
-        const keyboardHeight = window.innerHeight - window.visualViewport.height;
-        document.body.style.paddingBottom = `${keyboardHeight}px`;
+        const visibleHeight = window.visualViewport.height;
+        document.documentElement.style.height = `${visibleHeight}px`;
+        document.body.style.height = `${visibleHeight}px`;
       }
     };
 
     if (window.visualViewport) {
-      window.visualViewport.addEventListener("resize", handleResize);
-      window.visualViewport.addEventListener("scroll", handleResize);
+      window.visualViewport.addEventListener("resize", updateLayout);
+      window.visualViewport.addEventListener("scroll", updateLayout);
+      updateLayout();
     }
 
     return () => {
       if (window.visualViewport) {
-        window.visualViewport.removeEventListener("resize", handleResize);
-        window.visualViewport.removeEventListener("scroll", handleResize);
+        window.visualViewport.removeEventListener("resize", updateLayout);
+        window.visualViewport.removeEventListener("scroll", updateLayout);
       }
     };
   }, []);
 
   return null;
 }
-
