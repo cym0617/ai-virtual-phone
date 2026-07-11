@@ -1,9 +1,13 @@
 [build]
-  command = "npm run build"
-  publish = ".next"
+  command = "npx opennext build"
+  publish = ".opennext/netlify"
 
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+[build.environment]
+  NODE_VERSION = "22"
+  NPM_FLAGS = "--legacy-peer-deps"
+
+[[edge_handlers]]
+  path = "/api/*"
 
 # 字体/模型/图片是不带指纹的静态资源，体积大（中文字体 7~24MB、3D 模型 10MB+）。
 # 设为一年 immutable，浏览器命中后回访零带宽。更新这些文件时请改文件名（加版本后缀），
